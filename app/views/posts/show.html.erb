@@ -1,10 +1,10 @@
 <h1>
-<%= link_to(@post.url, target: "_blank") do %>
+<%= link_to(@post.url, target: '_blank') do %>
 	<%= @post.title %>
 <% end %>
 </h1>
 
-<%= @post.comments.count %> comments<br><br>
+<%= pluralize(@post.comments.count, 'comment') %><br><br>
 
 <h2>Comments</h2>
 <ol>
