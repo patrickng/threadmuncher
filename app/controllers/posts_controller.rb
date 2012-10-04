@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = Post.find(params[:id]).comments.all
+    @comments = @post.comments.all
 
     respond_to do |format|
       format.html # show.html.erb
