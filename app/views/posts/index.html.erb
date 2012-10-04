@@ -1,0 +1,13 @@
+<h1>Top Posts</h1>
+<ol>
+	<% @posts.each do |post| %>
+	<li>
+		<%= link_to(post.url, target: "_blank") do %>
+			<%= post.title %>
+		<% end %><br>
+		<%= link_to(post) do %>
+			<%= post.comments.count %> comments
+		<% end %>
+	</li>
+	<% end %>
+</ol>
