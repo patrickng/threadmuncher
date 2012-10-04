@@ -1,6 +1,7 @@
 This is my course project for this semester at railstutors.com
 
-== Getting Started
+Getting Started
+===============
 
 1. Download/unzip or git clone this project into your local directory
 
