@@ -4,7 +4,8 @@
 	<li>
 		<%= link_to(post.url, target: "_blank") do %>
 			<%= post.title %>
-		<% end %><br>
+		<% end %>
+		<span> | submitted <%= time_ago_in_words(post.created_at) %> ago</span><br>
 		<%= link_to(post) do %>
 			<%= post.comments.count %> comments
 		<% end %>
