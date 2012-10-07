@@ -1,20 +1,26 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all(order: "created_at desc")
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @posts }
-    end
   end
 
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments.all
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def create
+    @post = Post.new(params[:post])
 
     respond_to do |format|
-      format.html
-      format.json { render json: { post: @post, comments: @comments } }
+      if @post.save
+        redirect_to @post
+      else
+        render action: "new"
+      end
     end
   end
 end

@@ -1,14 +1,15 @@
 <h1>
-<%= link_to(@post.url, target: '_blank') do %>
-	<%= @post.title %>
-<% end %>
+<%= link_to(@post.title, @post.url, target: '_blank') %>
 </h1>
 
 <%= pluralize(@post.comments.count, 'comment') %><br><br>
 
 <h2>Comments</h2>
+
+<%= render "comment_form" %>
+
 <ol>
-<% @post.comments.each do |comment| %>
+<% @comments.each do |comment| %>
 	<li><%= comment.content %></li>
 <% end %>
 </ol>
