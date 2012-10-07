@@ -17,9 +17,9 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        redirect_to @post
+        format.html { redirect_to @post, notice: "Your post was created successfully." }
       else
-        render action: "new"
+        format.html { render action: "new", alert: "There was a problem creating your post." }
       end
     end
   end
