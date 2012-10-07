@@ -1,6 +1,8 @@
-<h1>
-<%= link_to(@post.title, @post.url, target: '_blank') %>
-</h1>
+<h1><%= link_to_if(@post.type_of_post == 1, @post.title, @post.url, target: '_blank') %></h1>
+
+<% if @post.type_of_post == 2 %>
+<p><%= @post.body %></p>
+<% end %>
 
 <%= pluralize(@post.comments.count, 'comment') %><br><br>
 
@@ -10,7 +12,7 @@
 
 <ol>
 <% @comments.each do |comment| %>
-	<li><%= comment.content %></li>
+  <li><%= comment.content %></li>
 <% end %>
 </ol>
 

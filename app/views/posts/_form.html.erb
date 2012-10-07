@@ -1,7 +1,11 @@
-<%= form_for(@post) do |f| %>
+<%= form_for @post do |f| %>
+  <%= f.label :type_of_post, "Choose your type of post:" %>
+  <%= f.select :type_of_post, options_for_select([['Link', 1], ['Text', 2]], 1) %>
   <%= f.label :title %>
   <%= f.text_field :title %>
   <%= f.label :url, "Link:" %>
   <%= f.text_field :url %>
+  <%= f.label :body, "Text:" %>
+  <%= f.text_area :body %>
   <%= f.submit "Create", class: "submit" %>
 <% end %>

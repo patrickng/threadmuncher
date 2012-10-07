@@ -9,7 +9,10 @@
   display: block;
   margin-top: 10px;
 }
-#comment_content {
+input {
+  width: 400px; 
+}
+#post_body, #comment_content {
   width: 400px;
   height: 75px;
 }
