@@ -3,7 +3,11 @@
 <ol>
 	<% @posts.each do |post| %>
 	<li>
-		<%= link_to(post.title, post.url, target: "_blank") %>
+    <% if post.type_of_post == 1 %>
+		  <%= link_to(post.title, post.url, target: "_blank") %>
+    <% elsif post.type_of_post == 2 %>
+      <%= link_to(post.title, post, target: "_blank") %>
+    <% end %>
 		<span class="site">(<%= post.url.split('/')[2] %>)</span>
 		<br>
 
