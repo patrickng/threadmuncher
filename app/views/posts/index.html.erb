@@ -6,7 +6,7 @@
     <% if post.type_of_post == 1 %>
 		  <%= link_to(post.title, post.url, target: "_blank") %>
     <% elsif post.type_of_post == 2 %>
-      <%= link_to(post.title, post, target: "_blank") %>
+      <%= link_to(post.title, post) %>
     <% end %>
 		<% if post.type_of_post == 1 %>
     <span class="site">(<%= post.url.split('/')[2] %>)</span>
