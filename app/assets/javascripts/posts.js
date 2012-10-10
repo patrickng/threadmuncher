@@ -6,7 +6,6 @@ $(document).ready(function() {
   text.prev().hide();
 
   $('#post_type_of_post').on('change', function(){
-    console.log($(this).val());
     if ($(this).val() == "2") {
       link.hide();
       link.prev().hide();
