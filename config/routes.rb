@@ -3,5 +3,6 @@ CourseProject::Application.routes.draw do
 
   resources :posts, only: [:index, :show, :new, :create] do
     resources :comments, only: [:create]
+    resources :votes, only: [:create]
   end
 end

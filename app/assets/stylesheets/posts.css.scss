@@ -16,3 +16,11 @@ input {
   width: 400px;
   height: 75px;
 }
+.post-vote-rank, .post-info {
+  display: block;
+  float: left;
+  margin-right: 5px;
+}
+.post-rank {
+  font-size: 30px;
+}
