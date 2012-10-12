@@ -2,16 +2,14 @@
 <%= link_to("Add post", new_post_path) %>
 <ol>
 	<% @posts.each do |post| %>
-	<li class="clearfix">
+	<li id="post-<%= post.id %>" class="clearfix">
     <span class="post-vote-rank">
       <div class="post-vote">
-        <div><%= link_to "Up", post_votes_path( vote: { post_id: post.id, rank: 1 } ), method: 'post', remote: 'true'  %></div>
-        <div>Down</div>
+        <div><%= link_to "Up", upvote_post_path(post), method: 'put', remote: 'true' %></div>
+        <div><%= link_to "Down", downvote_post_path(post), method: 'put', remote: 'true' %></div>
       </div>
       <div class="post-rank">
-      <% post.votes.each do |vote| %>
-        <%= vote.rank %>
-      <% end %>
+      <%= post.upvote - post.downvote %>
       </div>
     </span>
     <span class="post-info">
@@ -25,7 +23,10 @@
       <% end %>
   		<br>
 
-  		<span>submitted <%= time_ago_in_words(post.created_at) %> ago</span><br>
+  		<span>
+        (<span class="upvote"><%= post.upvote %></span> | <span class="downvote"><%= post.downvote  %></span>)
+      </span>
+      <span>submitted <%= time_ago_in_words(post.created_at) %> ago</span><br>
 
   		<%= link_to(pluralize(post.comments.count, 'comment'), post) %>
     </span>

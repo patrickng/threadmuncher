@@ -1,11 +1,23 @@
-<h1><%= link_to_if(@post.type_of_post == 1, @post.title, @post.url, target: '_blank') %></h1>
+<div id="post-<%= @post.id %>">
+  <div class="clearfix">
+    <span class="post-vote-rank">
+      <div><%= link_to "Up", upvote_post_path(@post), method: 'put', remote: 'true' %></div>
+      <div><%= link_to "Down", downvote_post_path(@post), method: 'put', remote: 'true' %></div>
 
-<% if @post.type_of_post == 2 %>
-<p><%= @post.body %></p>
-<% end %>
+      <div class="post-rank">
+        <%= @post.upvote - @post.downvote %>
+      </div>
+    </span>
+    <span class="post-info">
+      <h1><%= link_to_if(@post.type_of_post == 1, @post.title, @post.url, target: '_blank') %></h1>
 
-<%= pluralize(@post.comments.count, 'comment') %><br><br>
+      <% if @post.type_of_post == 2 %>
+      <p><%= @post.body %></p>
+      <% end %>
 
+      <%= pluralize(@post.comments.count, 'comment') %><br><br>
+    </span>
+  </div>
 <h2>Comments</h2>
 
 <%= render "comment_form" %>
@@ -17,3 +29,4 @@
 </ol>
 
 <%= link_to 'Back', posts_path %>
+</div>
