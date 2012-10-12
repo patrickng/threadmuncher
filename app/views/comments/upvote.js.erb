@@ -1,0 +1,2 @@
+$('#comment-<%= @comment.id %> .comment-rank').html("Comment rank: <%= @comment.upvote - @comment.downvote %>");
+$('#comment-<%= @comment.id %> .upvote').html('<%= @comment.upvote %>')

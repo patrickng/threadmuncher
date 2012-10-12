@@ -23,11 +23,24 @@
 
 <%= render "comment_form" %>
 
-<ol>
 <% @comments.each do |comment| %>
-  <li><%= comment.content %></li>
+  <div id="comment-<%= comment.id %>" class="clearfix comment">
+    <span class="comment-vote">
+      <div><%= link_to "&#x25B2;".html_safe, upvote_post_comment_path(@post, comment), method: 'put', remote: 'true' %></div>
+      <div><%= link_to "&#x25BC;".html_safe, downvote_post_comment_path(@post, comment), method: 'put', remote: 'true' %></div>
+    </span>
+    <span class="comment-body">
+      <div class="comment-rank">
+        Comment rank: <%= comment.upvote - comment.downvote %>
+      </div>
+      <%= comment.content %>
+      <span>
+        (<span class="upvote"><%= comment.upvote %></span> | <span class="downvote"><%= comment.downvote  %></span>)
+      </span>
+    </span>
+  </li>
+  </div>
 <% end %>
-</ol>
-
+<br>
 <%= link_to 'Back', posts_path %>
 </div>

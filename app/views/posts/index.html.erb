@@ -25,10 +25,10 @@
       <% end %>
   		<br>
 
-  		<span>
+  		<span class="total-upvotes-downvotes">
         (<span class="upvote"><%= post.upvote %></span> | <span class="downvote"><%= post.downvote  %></span>)
       </span>
-      <span>submitted <%= time_ago_in_words(post.created_at) %> ago</span><br>
+      <span class="time-ago">submitted <%= time_ago_in_words(post.created_at) %> ago</span><br>
 
   		<%= link_to(pluralize(post.comments.count, 'comment'), post) %>
     </span>

@@ -37,3 +37,12 @@ input {
 .post-container {
   margin-top: 20px;
 }
+.comment-body, .comment-vote {
+  float: left;
+}
+.comment-body {
+  margin-left: 10px;
+}
+.comment {
+  margin-top: 10px;
+}
