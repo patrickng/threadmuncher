@@ -26,13 +26,13 @@ class PostsController < ApplicationController
 
   def upvote
     @post = Post.find(params[:id])
-    @total_upvotes = @post.upvote += 1
+    @post.upvote += 1
     @post.save
   end
 
   def downvote
     @post = Post.find(params[:id])
-    @total_downvotes = @post.downvote += 1
+    @post.downvote += 1
     @post.save
   end
 end
