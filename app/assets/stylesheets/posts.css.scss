@@ -23,4 +23,17 @@ input {
 }
 .post-rank {
   font-size: 30px;
+  float: left;
+  margin: 10px 10px 0 10px;
+}
+.post-vote, .post-index {
+  float: left;
+  font-size: 20px;
+}
+.post-index {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.post-container {
+  margin-top: 20px;
 }

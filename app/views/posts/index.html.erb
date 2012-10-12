@@ -1,15 +1,17 @@
 <h1>Posts</h1>
 <%= link_to("Add post", new_post_path) %>
-<ol>
-	<% @posts.each do |post| %>
-	<li id="post-<%= post.id %>" class="clearfix">
+	<% @posts.each_with_index do |post, i| %>
+	<div id="post-<%= post.id %>" class="clearfix post-container">
+    <span class="post-index">
+      <%= i %>
+    </span>
     <span class="post-vote-rank">
       <div class="post-vote">
-        <div><%= link_to "Up", upvote_post_path(post), method: 'put', remote: 'true' %></div>
-        <div><%= link_to "Down", downvote_post_path(post), method: 'put', remote: 'true' %></div>
+        <div><%= link_to "&#x25B2;".html_safe, upvote_post_path(post), method: 'put', remote: 'true' %></div>
+        <div><%= link_to "&#x25BC;".html_safe, downvote_post_path(post), method: 'put', remote: 'true' %></div>
       </div>
       <div class="post-rank">
-      <%= post.upvote - post.downvote %>
+        <%= post.upvote - post.downvote %>
       </div>
     </span>
     <span class="post-info">
@@ -30,6 +32,6 @@
 
   		<%= link_to(pluralize(post.comments.count, 'comment'), post) %>
     </span>
-	</li>
+	</div>
 	<% end %>
 </ol>
