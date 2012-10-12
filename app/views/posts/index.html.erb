@@ -3,7 +3,7 @@
 	<% @posts.each_with_index do |post, i| %>
 	<div id="post-<%= post.id %>" class="clearfix post-container">
     <span class="post-index">
-      <%= i %>
+      <%= i + 1 %>
     </span>
     <span class="post-vote-rank">
       <div class="post-vote">
