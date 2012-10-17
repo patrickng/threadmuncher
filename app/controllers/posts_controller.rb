@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
+  before_filter :find_post, only: [:show, :upvote, :downvote]
+
   def index
     @posts = Post.all(order: "created_at desc")
   end
 
   def show
-    @post = Post.find(params[:id])
     @comments = @post.comments.all
   end
 
@@ -25,14 +26,16 @@ class PostsController < ApplicationController
   end
 
   def upvote
-    @post = Post.find(params[:id])
     @post.upvote += 1
     @post.save
   end
 
   def downvote
-    @post = Post.find(params[:id])
     @post.downvote += 1
     @post.save
+  end
+
+  def find_post
+    @post = Post.find(params[:id])
   end
 end
