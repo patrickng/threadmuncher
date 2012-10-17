@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
   before_filter :find_post, only: [:show, :upvote, :downvote]
+  before_filter :require_user, only: [:new, :create]
 
   def index
     @posts = Post.all(order: "created_at desc")
+    @user = User.find(session[:user_id]).handle
   end
 
   def show
@@ -37,5 +39,12 @@ class PostsController < ApplicationController
 
   def find_post
     @post = Post.find(params[:id])
+  end
+
+  private
+  def require_user
+    unless session[:user_id]
+      redirect_to login_path, notice: "You must be logged in to make a post!"
+    end
   end
 end

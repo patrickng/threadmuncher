@@ -4,4 +4,5 @@ class Post < ActiveRecord::Base
   validates :type_of_post, presence: "true"
 
   has_many :comments
+  belongs_to :user
 end

@@ -1,4 +1,11 @@
 <h1>Posts</h1>
+<% if !session[:user_id] %>
+<%= link_to("Sign up", new_user_path) %> or
+<% end %>
+<% if session[:user_id] %>Signed in as <%= @user %><% end %> <%= link_to_if(session[:user_id], "Log out", logout_path) do link_to("Log in", login_path) end %>
+
+<br>
+
 <%= link_to("Add post", new_post_path) %>
 	<% @posts.each_with_index do |post, i| %>
 	<div id="post-<%= post.id %>" class="clearfix post-container">
@@ -15,11 +22,7 @@
       </div>
     </span>
     <span class="post-info">
-      <% if post.type_of_post == 1 %>
-  		  <%= link_to(post.title, post.url, target: "_blank") %>
-      <% elsif post.type_of_post == 2 %>
-        <%= link_to(post.title, post) %>
-      <% end %>
+  		<%= display_url_link(post) %>
   		<% if post.type_of_post == 1 %>
       <span class="site">(<%= post.url.split('/')[2] %>)</span>
       <% end %>
@@ -28,7 +31,8 @@
   		<span class="total-upvotes-downvotes">
         (<span class="upvote"><%= post.upvote %></span> | <span class="downvote"><%= post.downvote  %></span>)
       </span>
-      <span class="time-ago">submitted <%= time_ago_in_words(post.created_at) %> ago</span><br>
+      <span class="time-ago">submitted <%= time_ago_in_words(post.created_at) %> ago</span>
+      <span>by <%= post.user.handle %></span><br>
 
   		<%= link_to(pluralize(post.comments.count, 'comment'), post) %>
     </span>

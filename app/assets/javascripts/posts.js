@@ -18,4 +18,12 @@ $(document).ready(function() {
       text.prev().hide();
     }
   });
+
+  if(!$(this).val()) {
+    $('#post_url').change(function () {
+      if($(this).val().indexOf("http://") !== 0 && $(this).val()) {
+        this.value = "http://" + this.value;
+      }
+    });
+  }
 });
