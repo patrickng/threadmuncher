@@ -2,7 +2,7 @@
 <% if !session[:user_id] %>
 <%= link_to("Sign up", new_user_path) %> or
 <% end %>
-<% if session[:user_id] %>Signed in as <%= @user %><% end %> <%= link_to_if(session[:user_id], "Log out", logout_path) do link_to("Log in", login_path) end %>
+<% if session[:user_id] %>Signed in as <%= @current_user %><% end %> <%= link_to_if(session[:user_id], "Log out", logout_path) do link_to("Log in", login_path) end %>
 
 <br>
 

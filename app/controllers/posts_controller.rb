@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
   before_filter :find_post, only: [:show, :upvote, :downvote]
-  before_filter :require_user, only: [:new, :create]
+  before_filter :require_user, only: [:new, :create, :upvote, :downvote]
 
   def index
     @posts = Post.all(order: "created_at desc")
-    @user = User.find(session[:user_id]).handle
+    current_user
   end
 
   def show
