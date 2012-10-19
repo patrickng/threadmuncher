@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 
   private
   def require_user
-    unless session[:user_id]
+    unless current_user
       session[:referer] = request.env["HTTP_REFERER"]
       redirect_to login_path, notice: "You must be logged in to post a comment!"
     end

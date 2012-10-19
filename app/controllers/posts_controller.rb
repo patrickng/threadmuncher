@@ -17,6 +17,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(params[:post])
+    @post.user = @current_user
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: "Your post was created successfully." }
@@ -42,9 +43,14 @@ class PostsController < ApplicationController
 
   private
   def require_user
-    unless session[:user_id]
+    unless current_user
       session[:referer] = request.env["HTTP_REFERER"]
-      redirect_to login_path, notice: "You must be logged in to make a post!"
+
+      @session ||= Session.new
+      respond_to do |format|
+        format.html { redirect_to login_path, notice: "You'll need to login or register to do that" }
+        # format.js { render partial: "users/form" }
+      end
     end
   end
 end
