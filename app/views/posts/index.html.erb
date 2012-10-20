@@ -2,7 +2,7 @@
 <% if !session[:user_id] %>
 <%= link_to("Sign up", new_user_path) %> or
 <% end %>
-<% if session[:user_id] %>Signed in as <%= @current_user_handle %><% end %> <%= link_to_if(session[:user_id], "Log out", logout_path) do link_to("Log in", login_path) end %>
+<% if @current_user %>Signed in as <%= @current_user_handle %><% end %> <%= link_to_if(@current_user, "Log out", logout_path) do link_to("Log in", login_path) end %>
 
 <br>
 
@@ -14,11 +14,11 @@
     </span>
     <span class="post-vote-rank">
       <div class="post-vote">
-        <div><%= link_to "&#x25B2;".html_safe, upvote_post_path(post), remote: 'true' %></div>
-        <div><%= link_to "&#x25BC;".html_safe, downvote_post_path(post), remote: 'true' %></div>
+        <div><%= link_to "&#x25B2;".html_safe, post_votes_path(post, vote: true), method: "post", remote: "true" %></div>
+        <div><%= link_to "&#x25BC;".html_safe, post_votes_path(post, vote: false), method: "post", remote: "true" %></div>
       </div>
       <div class="post-rank">
-        <%= post.upvote - post.downvote %>
+        <%= post.total_votes %>
       </div>
     </span>
     <span class="post-info">
@@ -29,7 +29,7 @@
   		<br>
 
   		<span class="total-upvotes-downvotes">
-        (<span class="upvote"><%= post.upvote %></span> | <span class="downvote"><%= post.downvote  %></span>)
+        (<span class="upvote"><%= post.upvotes %></span> | <span class="downvote"><%= post.downvotes %></span>)
       </span>
       <span class="time-ago">submitted <%= time_ago_in_words(post.created_at) %> ago</span>
       <span>by <%= post.user.handle %></span><br>

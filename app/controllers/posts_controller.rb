@@ -1,13 +1,14 @@
 class PostsController < ApplicationController
-  before_filter :find_post, only: [:show, :upvote, :downvote]
-  before_filter :require_user, only: [:new, :create, :upvote, :downvote]
+  before_filter :require_user, only: [:new, :create]
 
   def index
     @posts = Post.all(order: "created_at desc")
+    session[:referer] = request.env["HTTP_REFERER"]
     current_user
   end
 
   def show
+    @post = Post.find(params[:id])
     @comments = @post.comments.all
   end
 
@@ -23,33 +24,6 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: "Your post was created successfully." }
       else
         format.html { render action: "new", alert: "There was a problem creating your post." }
-      end
-    end
-  end
-
-  def upvote
-    @post.upvote += 1
-    @post.save
-  end
-
-  def downvote
-    @post.downvote += 1
-    @post.save
-  end
-
-  def find_post
-    @post = Post.find(params[:id])
-  end
-
-  private
-  def require_user
-    unless current_user
-      session[:referer] = request.env["HTTP_REFERER"]
-
-      @session ||= Session.new
-      respond_to do |format|
-        format.html { redirect_to login_path, notice: "You'll need to login or register to do that" }
-        # format.js { render partial: "users/form" }
       end
     end
   end

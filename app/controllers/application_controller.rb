@@ -3,7 +3,19 @@ class ApplicationController < ActionController::Base
 
   private
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    @current_user_handle = @current_user.handle
+    if session[:user_id]
+      @current_user ||= User.find(session[:user_id])
+      @current_user_handle = @current_user.handle
+    end
+  end
+
+  def require_user
+    unless current_user
+      session[:referer] = request.env["HTTP_REFERER"]
+      respond_to do |format|
+        format.html { redirect_to login_path, notice: "You'll need to login or register to do that" }
+        format.js { render partial: "users/form" }
+      end
+    end
   end
 end

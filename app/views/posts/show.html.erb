@@ -2,11 +2,11 @@
   <div class="clearfix">
     <span class="post-vote-rank">
       <div class="post-vote">
-        <div><%= link_to "&#x25B2;".html_safe, upvote_post_path(@post), method: 'put', remote: 'true' %></div>
-        <div><%= link_to "&#x25BC;".html_safe, downvote_post_path(@post), method: 'put', remote: 'true' %></div>
+        <div><%= link_to "&#x25B2;".html_safe, post_votes_path(@post, vote: "true"), method: 'post', remote: 'true' %></div>
+        <div><%= link_to "&#x25BC;".html_safe, post_votes_path(@post, vote: "false"), method: 'post', remote: 'true' %></div>
       </div>
       <div class="post-rank">
-        <%= @post.upvote - @post.downvote %>
+        <%= @post.total_votes %>
       </div>
     </span>
     <span class="post-info">
@@ -25,18 +25,11 @@
 
 <% @comments.each do |comment| %>
   <div id="comment-<%= comment.id %>" class="clearfix comment">
-    <span class="comment-vote">
-      <div><%= link_to "&#x25B2;".html_safe, upvote_post_comment_path(@post, comment), method: 'put', remote: 'true' %></div>
-      <div><%= link_to "&#x25BC;".html_safe, downvote_post_comment_path(@post, comment), method: 'put', remote: 'true' %></div>
-    </span>
+    <div class="comment-author">
+      <%= comment.user.handle %> <span class="time-ago">- <%= time_ago_in_words(comment.created_at) %> ago</span>
+    </div>
     <span class="comment-body">
-      <div class="comment-rank">
-        Comment rank: <%= comment.upvote - comment.downvote %>
-      </div>
       <%= comment.content %>
-      <span>
-        (<span class="upvote"><%= comment.upvote %></span> | <span class="downvote"><%= comment.downvote  %></span>)
-      </span>
     </span>
   </li>
   </div>
