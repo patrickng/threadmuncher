@@ -1,4 +1,5 @@
 <h1>Log in</h1>
+Don't have an account? <%= link_to "Sign up", signup_path %> for free!<br><br>
 
 <%= form_tag sessions_path do %>
   <%= label_tag :email %>
@@ -7,3 +8,5 @@
   <%= password_field_tag :password %>
   <%= submit_tag "Log in", class: "submit" %>
 <% end %>
+
+<%= link_to "Return to home", root_path %>

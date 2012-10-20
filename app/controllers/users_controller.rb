@@ -13,6 +13,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    
+    @user = User.find_by_handle(params[:handle])
+    @recent_posts = @user.posts.order("created_at desc").limit("10")
+    @recent_comments = @user.comments.order("created_at desc").limit("10")
+    @recent_voted_posts = @user.votes.order("created_at desc").limit("10").collect(&:post)
   end
 end

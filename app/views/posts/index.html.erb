@@ -32,7 +32,7 @@
         (<span class="upvote"><%= post.upvotes %></span> | <span class="downvote"><%= post.downvotes %></span>)
       </span>
       <span class="time-ago">submitted <%= time_ago_in_words(post.created_at) %> ago</span>
-      <span>by <%= post.user.handle %></span><br>
+      <span>by <%= link_to post.user.handle, user_profile_path(post.user.handle) %></span><br>
 
   		<%= link_to(pluralize(post.comments.count, 'comment'), post) %>
     </span>

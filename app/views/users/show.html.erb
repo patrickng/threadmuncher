@@ -1,0 +1,42 @@
+<h1><%= @user.handle %>'s profile</h1>
+
+<div class="clearfix">
+  <div id="recent-activity" class="span6">
+    <h2>10 Most Recent Posts</h2>
+
+    <% @recent_posts.each do |post| %>
+      <%= display_url_link(post) %>
+      <% if post.type_of_post == 2 %>
+          <p><%= post.body %></p>
+      <% end %>
+    <% end %>
+
+    <hr>
+
+    <h2>10 Most Recent Comments</h2>
+
+    <% @recent_comments.each do |comment| %>
+      <p><%= comment.content %></p>
+    <% end %>
+
+    <hr>
+
+    <h2>10 Most Recent Votes</h2>
+
+    <% @recent_voted_posts.each do |post| %>
+      <%= display_url_link(post) %>
+      <% if post.type_of_post == 2 %>
+          <p><%= post.body %></p>
+      <% end %>
+    <% end %>  
+
+  </div>
+  <div id="profile" class="span3">
+    <h2>Information</h2>
+    User Name: <%= @user.handle %><br>
+    Cake Day: <%= @user.created_at.strftime("%m/%d/%Y") %><br><br>
+
+    Link Karma: <%= @user.votes.size %><br><br>
+  </div>
+</div>
+<%= link_to "Return to home", root_path %>
