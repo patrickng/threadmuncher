@@ -3,6 +3,8 @@ CourseProject::Application.routes.draw do
 
   resources :users, only: [:new, :create]
   get "/user/:handle", to: "users#show", as: "user_profile"
+  get "/user/:handle/edit", to: "users#edit", as: "edit_user_profile"
+  put "/user/:handle", to: "users#update", as: "update_user_profile"
 
   resources :sessions
 

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  before_filter :require_user, only: [:edit, :update]
   def new
     @user = User.new
   end
@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    current_user
     @user = User.find_by_handle(params[:handle])
     @recent_posts = @user.posts.order("created_at desc").limit("10")
     @recent_comments = @user.comments.order("created_at desc").limit("10")
@@ -26,5 +27,18 @@ class UsersController < ApplicationController
       oauth_token: "119667769-PqkTXB247kMpeuV9JPgoQyJWq2l3jzVXznmQVSpO",
       oauth_token_secret: "Tdtq5lpJZWM09eSviKFRfoDBgjE4Qs5sI2FlfCdRIo"
     )
+  end
+
+  def edit
+    @user = User.find_by_handle(params[:handle])
+  end
+
+  def update
+    @user = User.find_by_handle(params[:handle])
+    if @user.update_attributes(params[:user])
+      redirect_to user_profile_path, notice: "You have updated your profile!"
+    else
+      render 'edit'
+    end
   end
 end
