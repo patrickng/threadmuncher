@@ -1,1 +1,8 @@
-Navigation
+<nav id="categories">
+  <ul>
+    <li><%= link_to "Home", root_path %></li>
+  <% @categories.each do |category| %>
+    <li><%= link_to category.name, category %></li>
+  <% end %>
+</ul>
+</nav>

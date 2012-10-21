@@ -1,5 +1,5 @@
 class VotesController < ApplicationController
-  before_filter :require_user, only: [:create, :update]
+  before_filter :require_user, only: [:create]
   def create
     @post = Post.find(params[:post_id])
     @user_vote = @post.votes.first

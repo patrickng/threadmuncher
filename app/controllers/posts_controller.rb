@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_filter :require_user, only: [:new, :create]
 
   def index
-    @posts = Post.all(order: "created_at desc")
+    @posts = Post.order("created_at desc")
     session[:referer] = request.env["HTTP_REFERER"]
     current_user
   end
@@ -13,6 +13,7 @@ class PostsController < ApplicationController
   end
 
   def new
+    @categories = Category.all
     @post = Post.new
   end
 

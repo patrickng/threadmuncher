@@ -6,6 +6,7 @@ class Post < ActiveRecord::Base
   has_many :comments
   has_many :votes
   belongs_to :user
+  belongs_to :category
 
   def total_votes
     votes.where(vote: true).size - votes.where(vote: false).size

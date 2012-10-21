@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :header_categories
+
+  def header_categories
+    @categories = Category.all
+  end
 
   private
   def current_user
@@ -14,7 +19,7 @@ class ApplicationController < ActionController::Base
       session[:referer] = request.env["HTTP_REFERER"]
       respond_to do |format|
         format.html { redirect_to login_path, notice: "You'll need to login to do that!" }
-        format.js { render partial: "users/form" }
+        format.js { render "sessions/new" }
       end
     end
   end

@@ -37,6 +37,16 @@
     Cake Day: <%= @user.created_at.strftime("%m/%d/%Y") %><br><br>
 
     Link Karma: <%= @user.votes.size %><br><br>
+
+    <hr>
+
+    <% if @user.twitter_handle %>
+    <h2>Latest Tweets</h2>
+
+    <%= @timeline %>
+    <% end %>
+
   </div>
 </div>
+<br>
 <%= link_to "Return to home", root_path %>
