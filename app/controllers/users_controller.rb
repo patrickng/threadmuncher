@@ -7,7 +7,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      session[:referer] = request.env["HTTP_REFERER"]
       redirect_to root_url, notice: "Sign up successful!"
     else
       render "new"
