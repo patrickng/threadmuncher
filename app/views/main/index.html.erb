@@ -1,7 +1,7 @@
 <% if !@current_user %>
 <%= link_to("Sign up", new_user_path) %> or
 <% end %>
-<% if @current_user %>Signed in as <%= @current_user_handle %><% end %> <%= link_to_if(@current_user, "Log out", logout_path) do link_to("Log in", login_path) end %>
+<% if @current_user %>Signed in as <%= link_to @current_user_handle, user_profile_path(@current_user_handle) %><% end %> <%= link_to_if(@current_user, "Log out", logout_path) do link_to("Log in", login_path) end %>
 
 <br>
 

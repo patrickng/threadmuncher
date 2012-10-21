@@ -2,7 +2,7 @@
 
 <div class="clearfix">
   <div id="recent-activity" class="span6">
-    <h2>10 Most Recent Posts</h2>
+    <h2>Recent Posts</h2>
 
     <% @recent_posts.each do |post| %>
       <%= display_url_link(post) %>
@@ -13,7 +13,7 @@
 
     <hr>
 
-    <h2>10 Most Recent Comments</h2>
+    <h2>Recent Comments</h2>
 
     <% @recent_comments.each do |comment| %>
       <p><%= comment.content %></p>
@@ -21,7 +21,7 @@
 
     <hr>
 
-    <h2>10 Most Recent Votes</h2>
+    <h2>Recent Votes</h2>
 
     <% @recent_voted_posts.each do |post| %>
       <%= display_url_link(post) %>
@@ -38,12 +38,15 @@
 
     Link Karma: <%= @user.votes.size %><br><br>
 
-    <hr>
-
     <% if @user.twitter_handle %>
-    <h2>Latest Tweets</h2>
+      <hr>
 
-    <%= @timeline %>
+      <h2>Latest Tweets</h2>
+      <ul>
+      <% @client.user_timeline(@user.twitter_handle, count: "10").each do |tweet| %>
+        <li><%= tweet.text %></li>
+      <% end %>
+      </ul>
     <% end %>
 
   </div>

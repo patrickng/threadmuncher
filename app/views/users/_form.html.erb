@@ -1,11 +1,13 @@
 <%= form_for @user do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
   <%= f.label :handle, "User name:" %>
   <%= f.text_field :handle %>
   <%= f.label :password, "Password:" %>
   <%= f.password_field :password %>
   <%= f.label :password_confirmation, "Confirmation:" %>
   <%= f.password_field :password_confirmation %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <%= f.label :twitter_handle %>
+  <%= f.text_field :twitter_handle %>
   <%= f.submit "Sign up", class: "submit" %>
 <% end %>
