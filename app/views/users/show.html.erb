@@ -1,5 +1,5 @@
 <h1><%= @user.handle %>'s profile</h1>
-<% if @current_user %><%= link_to "Edit Profile", edit_user_profile_path(@current_user) %><% end %>
+<% if @current_user %><%= link_to "Edit Profile", edit_user_profile_path(@current_user_handle) %><% end %>
 
 <div class="clearfix">
   <div id="recent-activity" class="span6">
