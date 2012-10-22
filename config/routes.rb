@@ -10,7 +10,7 @@ CourseProject::Application.routes.draw do
 
   resources :categories, only: [:index, :show, :new, :create]
 
-  resources :posts, path_names: { new: "submit" }, only: [:index, :show, :new, :create] do
+  resources :posts, path_names: { new: "submit" }, only: [:show, :new, :create] do
     resources :comments, only: [:create]
     resources :votes, only: [:create]
   end

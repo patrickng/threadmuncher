@@ -1,15 +1,10 @@
 class PostsController < ApplicationController
   before_filter :require_user, only: [:new, :create]
 
-  def index
-    @posts = Post.order("created_at desc")
-    session[:referer] = request.env["HTTP_REFERER"]
-    current_user
-  end
-
   def show
+    current_user
     @post = Post.find(params[:id])
-    @comments = @post.comments.all
+    @comments = @post.comments.order("created_at desc")
   end
 
   def new

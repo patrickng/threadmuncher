@@ -6,13 +6,17 @@ class VotesController < ApplicationController
 
 
     if @user_vote.blank?
-      Vote.create(post_id: params[:post_id], user_id: @current_user, vote: params[:vote])
+      @vote = Vote.new(post_id: params[:post_id], vote: params[:vote])
+      @vote.user = @current_user
+      @vote.save
     else
       if @user_vote.vote.to_s == params[:vote].to_s
         @user_vote.destroy
       else
         @user_vote.destroy
-        Vote.create(post_id: params[:post_id], user_id: @current_user, vote: params[:vote])
+        @vote = Vote.new(post_id: params[:post_id], vote: params[:vote])
+        @vote.user = @current_user
+        @vote.save
       end
     end
 

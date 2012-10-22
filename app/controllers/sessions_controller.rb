@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  after_filter :clear_session_referer, only: [:create]
   def new
 
   end
@@ -7,7 +6,9 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to session[:referer], notice: "Successfully logged in!"
+      session_redirect = session[:referer]
+      session[:referer] = nil
+      redirect_to session_redirect, notice: "Successfully logged in!"
     else
       flash[:alert] = "Invalid email or password"
       render "new"
@@ -17,8 +18,5 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     session[:referer] = nil
     redirect_to root_url, notice: "Successfully logged out."
-  end
-  def clear_session_referer
-    session[:referer] = nil
   end
 end

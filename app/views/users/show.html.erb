@@ -1,56 +1,47 @@
 <h1><%= @user.handle %>'s profile</h1>
-<% if @current_user %><%= link_to "Edit Profile", edit_user_profile_path(@current_user_handle) %><% end %>
 
-<div class="clearfix">
-  <div id="recent-activity" class="span6">
-    <h2>Recent Posts</h2>
+User Name: <%= @user.handle %><br>
+Cake Day: <%= @user.created_at.strftime("%m/%d/%Y") %><br>
 
-    <% @recent_posts.each do |post| %>
-      <%= display_url_link(post) %>
-      <% if post.type_of_post == 2 %>
-          <p><%= post.body %></p>
-      <% end %>
-    <% end %>
+Link Karma: <%= @user.votes.size %><br><br>
 
-    <hr>
+<h2>Recent Posts</h2>
 
-    <h2>Recent Comments</h2>
+<% @recent_posts.each do |post| %>
+  <%= link_to post.title, post %><br>
+  <% if post.type_of_post == 2 %>
+      <p><%= post.body %></p>
+  <% end %>
+<% end %>
 
-    <% @recent_comments.each do |comment| %>
-      <p><%= comment.content %></p>
-    <% end %>
+<hr>
 
-    <hr>
+<h2>Recent Comments</h2>
 
-    <h2>Recent Votes</h2>
+<% @recent_comments.each do |comment| %>
+  <p><%= comment.content %></p>
+<% end %>
 
-    <% @recent_voted_posts.each do |post| %>
-      <%= display_url_link(post) %>
-      <% if post.type_of_post == 2 %>
-          <p><%= post.body %></p>
-      <% end %>
-    <% end %>  
+<hr>
 
-  </div>
-  <div id="profile" class="span3">
-    <h2>Information</h2>
-    User Name: <%= @user.handle %><br>
-    Cake Day: <%= @user.created_at.strftime("%m/%d/%Y") %><br><br>
+<h2>Recent Votes</h2>
 
-    Link Karma: <%= @user.votes.size %><br><br>
+<% @recent_voted_posts.each do |post| %>
+  <%= link_to post.title, post %><br>
+  <% if post.type_of_post == 2 %>
+      <p><%= post.body %></p>
+  <% end %>
+<% end %>  
 
-    <% if @user.twitter_handle %>
-      <hr>
+<% if @user.twitter_handle %>
+  <hr>
 
-      <h2>Latest Tweets</h2>
-      <ul>
-      <% @client.user_timeline(@user.twitter_handle, count: "10").each do |tweet| %>
-        <li><%= tweet.text %></li>
-      <% end %>
-      </ul>
-    <% end %>
-
-  </div>
-</div>
+  <h2>Latest Tweets</h2>
+  <ul>
+  <% @client.user_timeline(@user.twitter_handle, count: "10").each do |tweet| %>
+    <li><%= tweet.text %></li>
+  <% end %>
+  </ul>
+<% end %>
 <br>
 <%= link_to "Return to home", root_path %>

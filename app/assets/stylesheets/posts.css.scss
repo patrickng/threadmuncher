@@ -43,6 +43,16 @@ input {
 .comment-body, .comment-author {
   margin-left: 10px;
 }
-.comment {
+.comment-container {
   margin-top: 10px;
+  background: #E9D4B3;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  padding: 10px;
+  border: 1px dashed #b68d4c;
+  box-shadow: 1px 1px 0 #b68d4c;
+  -moz-box-shadow: 1px 1px 0 #b68d4c;
+  -webkit-box-shadow: 1px 1px 0 #b68d4c;
+  font-family: 'ABeeZee';
 }

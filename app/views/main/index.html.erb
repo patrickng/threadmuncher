@@ -1,11 +1,4 @@
-<% if !@current_user %>
-<%= link_to("Sign up", new_user_path) %> or
-<% end %>
-<% if @current_user %>Signed in as <%= link_to @current_user_handle, user_profile_path(@current_user_handle) %><% end %> <%= link_to_if(@current_user, "Log out", logout_path) do link_to("Log in", login_path) end %>
-
-<br>
-
-<%= link_to "Create category", new_category_path %> | <%= link_to "Add post", new_post_path %>
+<%= link_to "Add post", new_post_path %> | <%= link_to "Create category", new_category_path %>
 <% @posts.each_with_index do |post, i| %>
 <div id="post-<%= post.id %>" class="clearfix post-container">
   <span class="post-index">
@@ -13,8 +6,8 @@
   </span>
   <span class="post-vote-rank">
     <div class="post-vote">
-      <div><%= link_to "&#x25B2;".html_safe, post_votes_path(post, vote: true), method: "post", remote: "true" %></div>
-      <div><%= link_to "&#x25BC;".html_safe, post_votes_path(post, vote: false), method: "post", remote: "true" %></div>
+      <div class="up"><%= link_to "&#x25B2;".html_safe, post_votes_path(post, vote: true), method: "post", remote: "true" %></div>
+      <div class="down"><%= link_to "&#x25BC;".html_safe, post_votes_path(post, vote: false), method: "post", remote: "true" %></div>
     </div>
     <div class="post-rank">
       <%= post.total_votes %>
@@ -36,7 +29,7 @@
 
     <br>
 
-    <%= link_to(pluralize(post.comments.count, 'comment'), post) %>
+    <%= link_to pluralize(post.comments.count, 'comment'), post %>
   </span>
 </div>
 <% end %>

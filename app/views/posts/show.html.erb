@@ -1,16 +1,16 @@
 <div id="post-<%= @post.id %>">
-  <div class="clearfix">
+  <div class="clearfix post-container">
     <span class="post-vote-rank">
       <div class="post-vote">
-        <div><%= link_to "&#x25B2;".html_safe, post_votes_path(@post, vote: "true"), method: 'post', remote: 'true' %></div>
-        <div><%= link_to "&#x25BC;".html_safe, post_votes_path(@post, vote: "false"), method: 'post', remote: 'true' %></div>
+        <div class="up"><%= link_to "&#x25B2;".html_safe, post_votes_path(@post, vote: "true"), method: 'post', remote: 'true' %></div>
+        <div class="down"><%= link_to "&#x25BC;".html_safe, post_votes_path(@post, vote: "false"), method: 'post', remote: 'true' %></div>
       </div>
       <div class="post-rank">
         <%= @post.total_votes %>
       </div>
     </span>
     <span class="post-info">
-      <h1><%= link_to_if(@post.type_of_post == 1, @post.title, @post.url, target: '_blank') %></h1>
+      <%= link_to_if(@post.type_of_post == 1, @post.title, @post.url, target: '_blank') %><br>
 
       <% if @post.type_of_post == 2 %>
       <p><%= @post.body %></p>
@@ -24,7 +24,7 @@
 <%= render "comment_form" %>
 
 <% @comments.each do |comment| %>
-  <div id="comment-<%= comment.id %>" class="clearfix comment">
+  <div id="comment-<%= comment.id %>" class="clearfix comment-container">
     <div class="comment-author">
       <%= comment.user.handle %> <span class="time-ago">- <%= time_ago_in_words(comment.created_at) %> ago</span>
     </div>
@@ -35,5 +35,5 @@
   </div>
 <% end %>
 <br>
-<%= link_to 'Back', posts_path %>
+<%= link_to 'See all posts', root_path %>
 </div>

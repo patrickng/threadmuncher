@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :require_user, only: [:edit, :update]
   def new
     @user = User.new
+    session[:referer] = root_path
   end
 
   def create
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.find_by_handle(params[:handle])
     @recent_posts = @user.posts.order("created_at desc").limit("10")
     @recent_comments = @user.comments.order("created_at desc").limit("10")
-    @recent_voted_posts = @user.votes.order("created_at desc").limit("10").map(&:post).flatten
+    @recent_voted_posts = @user.votes.order("created_at desc").limit("10").map(&:post)
 
     @client = Twitter::Client.new(
       consumer_key: "U1UQAdKnAQU2iNeqAZ7sqg",
