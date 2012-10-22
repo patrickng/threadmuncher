@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_filter :require_user, only: [:edit, :update]
   def new
     @user = User.new
-    session[:referer] = root_path
   end
 
   def create
