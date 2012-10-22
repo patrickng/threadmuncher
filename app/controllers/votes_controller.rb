@@ -2,7 +2,7 @@ class VotesController < ApplicationController
   before_filter :require_user, only: [:create]
   def create
     @post = Post.find(params[:post_id])
-    @user_vote = @post.votes.first
+    @user_vote = @post.votes.find_by_user_id(@current_user)
 
 
     if @user_vote.blank?
