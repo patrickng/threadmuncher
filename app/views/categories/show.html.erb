@@ -9,8 +9,8 @@
     </span>
     <span class="post-vote-rank">
       <div class="post-vote">
-        <div class="up"><%= link_to "&#x25B2;".html_safe, post_votes_path(post, vote: true), method: "post", remote: "true", class:("highlight" unless post.votes.where("user_id = ? AND vote = 't' ", @current_user).blank?) %></div>
-        <div class="down"><%= link_to "&#x25BC;".html_safe, post_votes_path(post, vote: false), method: "post", remote: "true", class:("highlight" unless post.votes.where("user_id = ? AND vote = 'f' ", @current_user).blank?) %></div>
+        <div class="up"><%= link_to "&#x25B2;".html_safe, post_votes_path(post, vote: true), method: "post", remote: "true", class:("highlight" unless check_upvote(post)) %></div>
+        <div class="down"><%= link_to "&#x25BC;".html_safe, post_votes_path(post, vote: false), method: "post", remote: "true", class:("highlight" unless check_downvote(post)) %></div>
       </div>
       <div class="post-rank">
         <%= post.total_votes %>

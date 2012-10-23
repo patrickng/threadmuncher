@@ -1,6 +1,5 @@
 module PostsHelper
   def display_url_link(post)
-    
     if post.type_of_post == 1
       if post.url.starts_with?("http://")
         return link_to post.title, post.url, target: "_blank"

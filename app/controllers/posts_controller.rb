@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_filter :require_user, only: [:new, :create]
+  helper_method :check_upvote
+  helper_method :check_downvote
 
   def show
     current_user
