@@ -15,6 +15,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     @post.user = @current_user
+    @post.category_id = params[:category][:id]
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: "Your post was created successfully." }

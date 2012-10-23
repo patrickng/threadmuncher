@@ -2,7 +2,7 @@
   <%= f.label :type_of_post, "Choose your type of post:" %>
   <%= f.select :type_of_post, options_for_select([['Link', 1], ['Text', 2]], 1) %>
   <%= f.label :category %>
-  <%= collection_select(:category, :id, Category.all, :id, :name)  %>
+  <%= collection_select(:category, :id, Category.all, :id, :name) %>
   <%= f.label :title %>
   <%= f.text_field :title %>
   <%= f.label :url, "Link:" %>
