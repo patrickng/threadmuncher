@@ -145,4 +145,12 @@ a {
 }
 .up, .down {
   font-size: 12px;
+  a {
+    &:hover {
+      border: 0;
+    }
+  }
+  .highlight {
+    color: #000;
+  }
 }

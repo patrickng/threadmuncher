@@ -6,6 +6,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    current_user
     @category = Category.find(params[:id])
   end
 

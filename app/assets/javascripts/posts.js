@@ -26,4 +26,20 @@ $(document).ready(function() {
       }
     });
   }
+  $('.up a').click(function() {
+    if ($(this).hasClass("highlight")) {
+      $(this).removeClass("highlight");
+    } else {
+      $(this).addClass("highlight");
+    }
+    $(this).parents('.post-vote').find('.down a').removeClass("highlight");
+  });
+  $('.down a').click(function() {
+    if ($(this).hasClass("highlight")) {
+      $(this).removeClass("highlight");
+    } else {
+      $(this).addClass("highlight");
+    }
+    $(this).parents('.post-vote').find('.up a').removeClass("highlight");
+  });
 });
