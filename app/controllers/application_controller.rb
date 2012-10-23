@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :header_categories
+  helper_method :check_upvote
+  helper_method :check_downvote
 
   def header_categories
     @categories = Category.all
@@ -22,5 +24,13 @@ class ApplicationController < ActionController::Base
         format.js { render "sessions/new" }
       end
     end
+  end
+
+  def check_upvote(post)
+    post.votes.where("user_id = ? AND vote = 't' ", @current_user).blank?
+  end
+
+  def check_downvote(post)
+    post.votes.where("user_id = ? AND vote = 'f' ", @current_user).blank?
   end
 end

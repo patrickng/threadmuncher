@@ -6,7 +6,9 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    current_user
     @category = Category.find(params[:id])
+    @category_posts = @category.posts.order("created_at desc")
   end
 
   def new

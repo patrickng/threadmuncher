@@ -2,15 +2,15 @@
 <%= @category.description %><br>
 
 <% if !@category.posts.empty? %>
-  <% @category.posts.each_with_index do |post, i| %>
+  <% @category_posts.each_with_index do |post, i| %>
   <div id="post-<%= post.id %>" class="clearfix post-container">
     <span class="post-index">
       <%= i + 1 %>
     </span>
     <span class="post-vote-rank">
       <div class="post-vote">
-        <div><%= link_to "&#x25B2;".html_safe, post_votes_path(post, vote: true), method: "post", remote: "true" %></div>
-        <div><%= link_to "&#x25BC;".html_safe, post_votes_path(post, vote: false), method: "post", remote: "true" %></div>
+        <div class="up"><%= link_to "&#x25B2;".html_safe, post_votes_path(post, vote: true), method: "post", remote: "true", class:("highlight" unless check_upvote(post)) %></div>
+        <div class="down"><%= link_to "&#x25BC;".html_safe, post_votes_path(post, vote: false), method: "post", remote: "true", class:("highlight" unless check_downvote(post)) %></div>
       </div>
       <div class="post-rank">
         <%= post.total_votes %>

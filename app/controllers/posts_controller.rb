@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_filter :require_user, only: [:new, :create]
+  helper_method :check_upvote
+  helper_method :check_downvote
 
   def show
     current_user
@@ -15,6 +17,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     @post.user = @current_user
+    @post.category_id = params[:category][:id]
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: "Your post was created successfully." }
