@@ -8,8 +8,7 @@
   <%= link_to("Sign up", new_user_path) %> or
   <% end %>
   <% if @current_user %>
-    Signed in as <%= link_to @current_user_handle, user_profile_path(@current_user_handle) %>, 
-    you may <%= link_to "Edit Profile", edit_user_profile_path(@current_user_handle) %> or
+    Signed in as <%= link_to @current_user_handle, user_profile_path(@current_user_handle) %>, you may
   <% end %> 
   <%= link_to_if(@current_user, "Log out", logout_path) do link_to("Log in", login_path) end %>
   </div>
