@@ -2,12 +2,13 @@ class CategoriesController < ApplicationController
   before_filter :require_user, only: [:new, :create]
 
   def index
-    @categories = Category.all.order("created_at desc")
+    @categories = Category.all
   end
 
   def show
     current_user
     @category = Category.find(params[:id])
+    @category_posts = @category.posts.order("created_at desc")
   end
 
   def new

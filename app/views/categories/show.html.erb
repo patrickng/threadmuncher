@@ -2,7 +2,7 @@
 <%= @category.description %><br>
 
 <% if !@category.posts.empty? %>
-  <% @category.posts.each_with_index do |post, i| %>
+  <% @category_posts.each_with_index do |post, i| %>
   <div id="post-<%= post.id %>" class="clearfix post-container">
     <span class="post-index">
       <%= i + 1 %>
