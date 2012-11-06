@@ -21,7 +21,7 @@ $(document).ready(function() {
 
   if(!$(this).val()) {
     $('#post_url').change(function () {
-      if($(this).val().match(/^http([s])?):\/\/.*/) && $(this).val()) {
+      if($(this).val().match(/^http([s])?:\/\/.*/) && $(this).val()) {
         this.value = "http://" + this.value;
       }
     });
