@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       session[:referer] = request.env["HTTP_REFERER"]
       respond_to do |format|
-        format.html { redirect_to login_path, notice: "You'll need to login to do that!" }
+        format.html { redirect_to login_path, alert: "You'll need to login to do that!" }
         format.js { render "sessions/new" }
       end
     end
