@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :handle, :twitter_handle, :password, :password_confirmation
 
+  validates :email, presence: "true"
+  validates :handle, presence: "true"
   validates :password, on: :create, presence: "true"
 
   has_secure_password
