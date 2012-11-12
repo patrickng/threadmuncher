@@ -1,4 +1,5 @@
-<%= form_for([@post, @post.comments.new]) do |f| %>
+<%= form_for([@post, @comment]) do |f| %>
+  <%= render partial: "layouts/errors", locals: { content: @comment } %>
   <%= f.label :content, "Post your comment:" %>
   <%= f.text_area :content %>
   <%= f.submit "Submit", class: "submit" %>

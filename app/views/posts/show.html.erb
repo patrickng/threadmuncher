@@ -20,10 +20,9 @@
     </span>
   </div>
 <h2>Comments</h2>
+<%= render "posts/comment_form", locals: { content: @comment } %>
 
-<%= render "comment_form" %>
-
-<% @comments.each do |comment| %>
+<% @post.comments.order("created_at desc").each do |comment| %>
   <div id="comment-<%= comment.id %>" class="clearfix comment-container">
     <div class="comment-author">
       <%= comment.user.handle %> <span class="time-ago">- <%= time_ago_in_words(comment.created_at) %> ago</span>

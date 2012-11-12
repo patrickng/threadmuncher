@@ -1,0 +1,11 @@
+<% if content.errors.any? %>
+  <div id="error_explanation">
+    <%= pluralize(content.errors.count, "error") %> prohibited this comment from being saved:
+
+    <ul>
+    <% content.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

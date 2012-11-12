@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def show
     current_user
     @post = Post.find(params[:id])
-    @comments = @post.comments.order("created_at desc")
+    @comment = @post.comments.new
   end
 
   def new
