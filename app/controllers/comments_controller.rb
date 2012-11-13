@@ -9,11 +9,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to post_path(@post) }
       else
-        format.html do
-          @post = Post.find(params[:post_id])
-          @comments = @post.comments.new
-          render "posts/show"
-        end
+        format.html { render "posts/show" }
       end
     end
   end
