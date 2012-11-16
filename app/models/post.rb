@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   validates :type_of_post, presence: "true", numericality: "true"
   validates :type_of_post, inclusion: { in: 1..2, message: "Invalid post type" }
   validates :title, presence: "true"
+  validates :category_id, presence: "true"
 
   validates :url, presence: "true", if: Proc.new { |o| o.type_of_post == 1 }
   validates :body, presence: "true", if: Proc.new { |o| o.type_of_post == 2 }
