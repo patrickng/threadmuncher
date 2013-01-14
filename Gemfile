@@ -13,6 +13,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.10.1'
   gem 'factory_girl_rails', '~> 3.2.0'
   gem 'guard-rspec', '~> 0.7.0'
+  gem 'thin', '~> 1.5.0'
 end
 
 group :test do
