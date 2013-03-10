@@ -4,6 +4,7 @@ gem 'rails', '3.2.12'
 gem 'bootstrap-sass', '~> 2.1.0.0'
 gem 'bcrypt-ruby', '~> 3.0.1'
 gem 'twitter', '~> 4.1.1'
+gem 'twitter-text'
 gem 'thin', '~> 1.5.0'
 
 # Bundle edge Rails instead:
@@ -14,6 +15,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.10.1'
   gem 'factory_girl_rails', '~> 3.2.0'
   gem 'guard-rspec', '~> 0.7.0'
+  gem 'pry'
+  gem 'pry-nav'
 end
 
 group :test do
