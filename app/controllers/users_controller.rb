@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+
+  require 'twitter-text'
+  include Twitter::Autolink
+
   before_filter :require_user, only: [:edit, :update]
   def new
     @user = User.new
