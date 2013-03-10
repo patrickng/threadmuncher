@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.12'
 gem 'bootstrap-sass', '~> 2.1.0.0'
 gem 'bcrypt-ruby', '~> 3.0.1'
 gem 'twitter', '~> 4.1.1'
@@ -25,6 +25,7 @@ end
 
 group :production do
   gem 'pg', '~> 0.12.2'
+  gem 'sentry-raven'
 end
 
 # Gems used only for assets and not required
