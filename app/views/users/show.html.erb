@@ -39,7 +39,7 @@ Link Karma: <%= @user.votes.size %><br><br>
   <h2>Latest Tweets</h2>
   <ul>
   <% @client.user_timeline(@user.twitter_handle, count: "10").each do |tweet| %>
-    <li><%= auto_link(tweet.text) %></li>
+    <li><%= auto_link("tweet.text") %></li>
   <% end %>
   </ul>
 <% end %>
