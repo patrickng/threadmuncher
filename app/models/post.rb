@@ -28,4 +28,5 @@ class Post < ActiveRecord::Base
   def downvotes
     votes.where(vote: false).size
   end
+  
 end

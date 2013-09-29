@@ -15,6 +15,12 @@ CourseProject::Application.routes.draw do
     resources :votes, only: [:create]
   end
 
+  namespace :api, path: "", constraints: { subdomain: "api" }, defaults: { format: "json" } do
+    namespace :v1 do
+      resources :posts
+    end
+  end
+
   get "logout" => "sessions#destroy", as: "logout"
   get "login" => "sessions#new", as: "login"
   get "signup" => "users#new", as: "signup"

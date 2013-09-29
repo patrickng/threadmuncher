@@ -6,6 +6,7 @@ gem 'bcrypt-ruby', '~> 3.0.1'
 gem 'twitter', '~> 4.1.1'
 gem 'twitter-text'
 gem 'thin', '~> 1.5.0'
+gem 'active_model_serializers'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

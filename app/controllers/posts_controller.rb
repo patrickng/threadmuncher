@@ -7,6 +7,10 @@ class PostsController < ApplicationController
     current_user
     @post = Post.find(params[:id])
     @comment = @post.comments.new
+
+    respond_to do |format|
+      format.html # show.html.erb
+    end
   end
 
   def new
