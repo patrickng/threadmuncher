@@ -21,8 +21,8 @@ class Api::V1::PostsController < ApplicationController
 
   def create
     @post = Post.new(params[:post])
-    # @post.user = 1
-    # @post.category_id = params[:category][:id]
+    @post.user = current_user
+    @post.category_id = params[:category][:id]
     respond_to do |format|
       if @post.save
         format.json { render json: @post, status: :created, location: @post }
