@@ -8,7 +8,7 @@ class Api::V1::PostsController < ApplicationController
 
   def show
     current_user
-    @post = Post.find(params[:id])
+    @post = Post.includes(:comments).find(params[:id])
     render json: @post
   end
 
