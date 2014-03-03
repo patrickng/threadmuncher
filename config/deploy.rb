@@ -19,6 +19,7 @@ set :branch, 'production-rails-4.0'
 set :app_path, "#{deploy_to}/#{current_path}"
 set :app_port, '3001'
 set :pid_file, "#{deploy_to}/shared/tmp/pids/#{rails_env}.pid"
+set :socket, "unix://#{deploy_to}/shared/tmp/sockets/#{rails_env}.sock"
 
 set :shared_paths, ['config/database.yml', 'log']
 
@@ -33,6 +34,9 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/tmp/pids"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/pids"]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp/sockets"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/sockets"]
  
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
@@ -59,21 +63,23 @@ end
 
 desc 'Starts the application'
 task :start => :environment do
-  queue "cd #{app_path} ; bundle exec rackup -s puma " +
-    "-p #{app_port} -P #{pid_file} -E #{rails_env} -D"
-  queue "cd #{app_path} ; RAILS_ENV=#{rails_env} ./script/delayed_job start"
+  queue "cd #{app_path} ; bundle exec puma " +
+    "-b #{socket} -p #{app_port} --pidfile #{pid_file} -e #{rails_env} -d"
 end
  
 desc 'Stops the application'
 task :stop => :environment do
-  queue "cd #{app_path} ; RAILS_ENV=#{rails_env} ./script/delayed_job stop"
   queue %[kill -9 `cat #{pid_file}`]
+  queue! %[rm -f #{pid_file}]
+  queue! %[rm -f #{socket}]
 end
  
 desc 'Restarts the application'
 task :restart => :environment do
   invoke :stop
   invoke :start
+  # queue  %[echo "-----> Hot Restarting Puma"]
+  # queue! %[kill -s SIGUSR2 `cat #{pid_file}`]
 end
 
 
