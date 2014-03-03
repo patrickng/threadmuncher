@@ -17,7 +17,7 @@ set :repository, 'git@github.com:patrickng/threadmuncher.git'
 set :branch, 'production-rails-4.0'
 
 set :app_path, "#{deploy_to}/#{current_path}"
-set :app_port, '3000'
+set :app_port, '9000'
 set :pid_file, "#{deploy_to}/shared/tmp/pids/#{rails_env}.pid"
 set :socket, "unix://#{deploy_to}/shared/tmp/sockets/#{rails_env}.sock"
 
