@@ -9,14 +9,18 @@ require 'mina/rvm'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, 'staging.pixelate.net'
-set :deploy_to, '/home/deploy/ruby/threadmuncher'
-set :repository, 'git@github.com:patrickng/threadmuncher.git'
-set :branch, 'master'
 set :user, 'deploy'
+set :domain, 'staging.pixelate.net'
+set :codename, 'threadmuncher'
+set :deploy_to, "/home/#{user}/ruby/#{codename}"
+set :repository, 'git@github.com:patrickng/threadmuncher.git'
+set :branch, 'production-rails-4.0'
+
+set :app_path, "#{deploy_to}/#{current_path}"
+set :app_port, '3001'
+set :pid_file, "#{deploy_to}/shared/tmp/pids/#{rails_env}.pid"
 
 set :shared_paths, ['config/database.yml', 'log']
-set :app_path, "#{deploy_to}/#{current_path}"
 
 task :environment do
   invoke :'rvm:use[ruby-2.0.0-p247@default]'
@@ -25,12 +29,16 @@ end
 task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/log"]
-
+ 
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp/pids"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/pids"]
+ 
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
-
+ 
   queue! %[touch "#{deploy_to}/shared/config/database.yml"]
-  queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
+  queue!  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
 end
 
 desc "Deploys the current version to the server."

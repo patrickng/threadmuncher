@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 2.1.0.0'
-gem 'bcrypt-ruby', '~> 3.0.1'
+gem 'bcrypt-ruby'
 gem 'twitter', '~> 4.1.1'
 gem 'twitter-text'
 gem 'puma', '~> 2.8.0'
