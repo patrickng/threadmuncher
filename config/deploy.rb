@@ -68,7 +68,7 @@ desc 'Starts the application'
 task :start => :environment do
   # queue "cd #{app_path} ; bundle exec puma " +
   #   "-b #{socket} -p #{app_port} --pidfile #{pid_file} -e #{rails_env} -d"
-  queue "cd #{app_path} ; bundle exec puma -C #{app_path}/config.ru -e production"
+  queue "cd #{app_path} ; bundle exec puma -C #{app_path}/config/puma.rb -e production"
 end
  
 desc 'Stops the application'
