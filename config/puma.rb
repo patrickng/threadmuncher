@@ -1,10 +1,10 @@
 user = 'deploy'
 codename = 'threadmuncher'
 root = "/home/#{user}/ruby/#{codename}"
-environment 'production'
 daemonize true 
-bind "unix://#{root}/shared/tmp/sockets/#{environment}.sock"
-pidfile "#{root}/shared/tmp/pids/#{environment}.pid"
+bind "unix://#{root}/shared/tmp/sockets/production.sock"
+pidfile "#{root}/shared/tmp/pids/production.pid"
+state_path "#{root}/shared/tmp/state/production.state"
 rackup "#{root}/current/config.ru"
 threads 4, 8  
-activate_control_app "unix://#{root}/shared/tmp/sockets/#{environment}.sock"
+activate_control_app "unix://#{root}/shared/tmp/sockets/production.sock"

@@ -37,6 +37,9 @@ task :setup => :environment do
 
   queue! %[mkdir -p "#{deploy_to}/shared/tmp/sockets"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/sockets"]
+
+  queue! %[mkdir -p "#{deploy_to}/shared/tmp/state"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tmp/state"]
  
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
@@ -65,7 +68,7 @@ desc 'Starts the application'
 task :start => :environment do
   # queue "cd #{app_path} ; bundle exec puma " +
   #   "-b #{socket} -p #{app_port} --pidfile #{pid_file} -e #{rails_env} -d"
-  queue "cd #{app_path} ; bundle exec puma -C #{app_path}/config.ru"
+  queue "cd #{app_path} ; bundle exec puma -C #{app_path}/config.ru -e production"
 end
  
 desc 'Stops the application'
