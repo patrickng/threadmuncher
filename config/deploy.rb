@@ -18,8 +18,9 @@ set :branch, 'production-rails-4.0'
 
 set :app_path, "#{deploy_to}/#{current_path}"
 set :app_port, '9000'
-# set :pid_file, "#{deploy_to}/shared/tmp/pids/#{rails_env}.pid"
-# set :socket, "unix://#{deploy_to}/shared/tmp/sockets/#{rails_env}.sock"
+set :pid_file, "#{deploy_to}/shared/tmp/pids/#{rails_env}.pid"
+set :socket, "#{deploy_to}/shared/tmp/sockets/#{rails_env}.sock"
+set :state, "#{deploy_to}/shared/tmp/state/#{rails_env}.sock"
 
 set :shared_paths, ['config/database.yml', 'log']
 
@@ -73,9 +74,10 @@ end
  
 desc 'Stops the application'
 task :stop => :environment do
-  queue %[kill -9 `cat #{pid_file}`]
-  queue! %[rm -f #{pid_file}]
-  queue! %[rm -f #{socket}]
+  # queue %[kill -9 `cat #{pid_file}`]
+  queue! %[rm -rf #{pid_file}]
+  queue! %[rm -rf #{socket}]
+  queue! %[rm -rf #{state}]
 end
  
 desc 'Restarts the application'
