@@ -7,4 +7,4 @@ bind "unix://#{root}/shared/tmp/sockets/#{environment}.sock"
 pidfile "#{root}/shared/tmp/pids/#{environment}.pid"
 rackup "#{root}/current/config.ru"
 threads 4, 8  
-activate_control_app
+activate_control_app "unix://#{root}/shared/tmp/sockets/#{environment}.sock"
