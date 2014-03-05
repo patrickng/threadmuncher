@@ -18,8 +18,8 @@ set :branch, 'production-rails-4.0'
 
 set :app_path, "#{deploy_to}/#{current_path}"
 set :app_port, '9000'
-set :pid_file, "#{deploy_to}/shared/tmp/pids/#{rails_env}.pid"
-set :socket, "unix://#{deploy_to}/shared/tmp/sockets/#{rails_env}.sock"
+# set :pid_file, "#{deploy_to}/shared/tmp/pids/#{rails_env}.pid"
+# set :socket, "unix://#{deploy_to}/shared/tmp/sockets/#{rails_env}.sock"
 
 set :shared_paths, ['config/database.yml', 'log']
 
@@ -63,8 +63,9 @@ end
 
 desc 'Starts the application'
 task :start => :environment do
-  queue "cd #{app_path} ; bundle exec puma " +
-    "-b #{socket} -p #{app_port} --pidfile #{pid_file} -e #{rails_env} -d"
+  # queue "cd #{app_path} ; bundle exec puma " +
+  #   "-b #{socket} -p #{app_port} --pidfile #{pid_file} -e #{rails_env} -d"
+  queue "cd #{app_path} ; bundle exec puma -C #{app_path}/config.ru"
 end
  
 desc 'Stops the application'
