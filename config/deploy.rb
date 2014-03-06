@@ -3,12 +3,6 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rvm'
 
-# Basic settings:
-#   domain       - The hostname to SSH to.
-#   deploy_to    - Path to deploy into.
-#   repository   - Git repo to clone from. (needed by mina/git)
-#   branch       - Branch name to deploy. (needed by mina/git)
-
 set :user, 'deploy'
 set :domain, 'staging.pixelate.net'
 set :codename, 'threadmuncher'
@@ -67,26 +61,18 @@ end
 
 desc 'Starts the application'
 task :start => :environment do
-  # queue "cd #{app_path} ; bundle exec puma " +
-  #   "-b #{socket} -p #{app_port} --pidfile #{pid_file} -e #{rails_env} -d"
-  # queue "cd #{app_path} ; bundle exec puma -C #{app_path}/config/puma.rb -e production"
   queue "sudo start puma app=#{app_path}"
 end
  
 desc 'Stops the application'
 task :stop => :environment do
-  # queue "sudo stop puma app=#{app_path}"
-  queue! %[rm -rf #{pid_file}]
-  queue! %[rm -rf #{socket}]
-  queue! %[rm -rf #{state}]
+  queue "sudo stop puma app=#{app_path}"
 end
  
 desc 'Restarts the application'
 task :restart => :environment do
   invoke :stop
   invoke :start
-  # queue  %[echo "-----> Hot Restarting Puma"]
-  # queue! %[kill -s SIGUSR2 `cat #{pid_file}`]
 end
 
 
