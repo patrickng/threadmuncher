@@ -14,7 +14,7 @@ set :app_path, "#{deploy_to}/#{current_path}"
 set :app_port, '9000'
 set :pid_file, "#{deploy_to}/shared/tmp/pids/#{rails_env}.pid"
 set :socket, "#{deploy_to}/shared/tmp/sockets/#{rails_env}.sock"
-set :state, "#{deploy_to}/shared/tmp/state/#{rails_env}.sock"
+set :state, "#{deploy_to}/shared/tmp/state/#{rails_env}.state"
 
 set :shared_paths, ['config/database.yml', 'log']
 
