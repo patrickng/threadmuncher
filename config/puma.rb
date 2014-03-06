@@ -1,6 +1,7 @@
 user = 'deploy'
 codename = 'threadmuncher'
 root = "/home/#{user}/ruby/#{codename}"
+environment "production"
 daemonize false
 bind "unix://#{root}/shared/tmp/sockets/production.sock"
 pidfile "#{root}/shared/tmp/pids/production.pid"

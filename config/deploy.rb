@@ -60,7 +60,7 @@ task :deploy => :environment do
     invoke :'rails:assets_precompile'
 
     to :launch do
-      # invoke :restart
+      invoke :restart
     end
   end
 end
@@ -69,12 +69,13 @@ desc 'Starts the application'
 task :start => :environment do
   # queue "cd #{app_path} ; bundle exec puma " +
   #   "-b #{socket} -p #{app_port} --pidfile #{pid_file} -e #{rails_env} -d"
-  queue "cd #{app_path} ; bundle exec puma -C #{app_path}/config/puma.rb -e production"
+  # queue "cd #{app_path} ; bundle exec puma -C #{app_path}/config/puma.rb -e production"
+  queue "sudo start puma app=#{app_path}"
 end
  
 desc 'Stops the application'
 task :stop => :environment do
-  # queue %[kill -9 `cat #{pid_file}`]
+  # queue "sudo stop puma app=#{app_path}"
   queue! %[rm -rf #{pid_file}]
   queue! %[rm -rf #{socket}]
   queue! %[rm -rf #{state}]
