@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0.3'
-gem 'bootstrap-sass', '~> 2.1.0.0'
+gem 'rails', '~> 4.1.7'
+gem 'bootstrap-sass', '~> 2.1.0'
 gem 'bcrypt-ruby'
 gem 'twitter', '~> 4.1.1'
 gem 'twitter-text'
@@ -13,10 +13,11 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'jquery-rails'
+gem 'grape'
+gem 'grape-entity'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.10.1'
-  gem 'factory_girl_rails', '~> 3.2.0'
   gem 'guard-rspec', '~> 0.7.0'
   gem 'pry'
   gem 'pry-nav'

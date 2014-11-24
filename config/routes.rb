@@ -1,5 +1,7 @@
-CourseProject::Application.routes.draw do
+Threadmuncher::Application.routes.draw do
   root to: "main#index"
+
+  mount API => '/'
 
   resources :users, only: [:new, :create]
   get "/user/:handle", to: "users#show", as: "user_profile"

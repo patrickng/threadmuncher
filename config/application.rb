@@ -9,7 +9,7 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-module CourseProject
+module Threadmuncher
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -68,5 +68,8 @@ module CourseProject
         request_specs: true
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
+
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
   end
 end
