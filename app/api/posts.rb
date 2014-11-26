@@ -5,6 +5,14 @@ module Posts
   end
 
   class Data < Grape::API
+    helpers do
+      def current_user
+        if session[:user_id]
+          @current_user ||= User.find(session[:user_id])
+          @current_user_handle = @current_user.handle
+        end
+      end
+    end
     resource :posts do
       desc "Posts"
 
@@ -14,7 +22,7 @@ module Posts
       end
 
       params do
-        requires :id, type: Integer, desc: "Status id."
+        requires :id, type: Integer, desc: "Post ID."
       end
       route_param :id do
         get do
@@ -22,6 +30,13 @@ module Posts
           present post, with: Posts::Entity
         end
       end
+
+      # params do
+      #   requires current_user
+      # end
+      # post do
+
+      # end
     end
   end
 end

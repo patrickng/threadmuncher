@@ -18,7 +18,7 @@ gem 'grape-entity'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.10.1'
-  gem 'guard-rspec', '~> 0.7.0'
+  gem 'guard-rspec'
   gem 'pry'
   gem 'pry-nav'
 end
