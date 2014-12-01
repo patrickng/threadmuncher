@@ -9,7 +9,7 @@ Threadmuncher::Application.routes.draw do
   # get "/user/:handle/edit", to: "users#edit", as: "edit_user_profile"
   # put "/user/:handle", to: "users#update", as: "update_user_profile"
   
-  # devise_for :users, controllers: { sessions: "users/sessions" }
+  # devise_for :users, controllers: { registrations: "users/registration" }
 
   # resources :sessions
 
@@ -26,7 +26,10 @@ Threadmuncher::Application.routes.draw do
     end
   end
 
-  get "logout" => "devise/sessions#destroy", as: "logout"
-  get "login" => "devise/sessions#new", as: "login"
-  get "signup" => "devise/registrations#new", as: "signup"
+  # devise_for :users 
+  # devise_scope :user do
+  #   get "logout" => "devise/sessions#destroy", as: "logout"
+  #   get "login" => "devise/sessions#new", as: "login"
+  #   get "signup" => "devise/registrations#new", as: "signup"
+  # end
 end

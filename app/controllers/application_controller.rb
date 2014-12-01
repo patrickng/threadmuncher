@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :header_categories
+  before_filter :configure_permitted_parameters, if: :devise_controller?
   helper_method :check_upvote
   helper_method :check_downvote
 
@@ -9,16 +10,9 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  def current_user
-    if session[:user_id]
-      @current_user ||= User.find(session[:user_id])
-      @current_user_handle = @current_user.handle
-    end
-  end
 
   def require_user
     unless current_user
-      session[:referer] = request.env["HTTP_REFERER"]
       respond_to do |format|
         format.html { redirect_to login_path, alert: "You'll need to login to do that!" }
         format.js { render "sessions/new" }
@@ -32,5 +26,13 @@ class ApplicationController < ActionController::Base
 
   def check_downvote(post)
     post.votes.where("user_id = ? AND vote = 'f' ", @current_user).blank?
+  end
+
+  protected
+  
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) do |u|
+      u.permit(:email, :password, :password_confirmation, :handle)
+    end
   end
 end

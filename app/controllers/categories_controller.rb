@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_filter :require_user, only: [:new, :create]
+  before_filter :authenticate_user!, only: [:new, :create]
 
   def index
     @categories = Category.all

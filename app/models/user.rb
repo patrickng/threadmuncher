@@ -3,9 +3,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, stretches: 20
+         :recoverable, :rememberable, :trackable, :validatable, stretches: 1
 
-  # attr_accessible :email, :handle, :twitter_handle, :password, :password_confirmation
+  attr_accessible :email, :handle, :twitter_handle, :password, :password_confirmation
 
   # validates :email, presence: "true"
   # validates :handle, presence: "true"
