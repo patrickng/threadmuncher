@@ -1,3 +1,3 @@
 module ApplicationHelper
-  include Twitter::Autolink
+  # include Twitter::Autolink
 end

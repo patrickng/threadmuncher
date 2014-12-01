@@ -33,15 +33,5 @@ Link Karma: <%= @user.votes.size %><br><br>
   <% end %>
 <% end %>  
 
-<% if @user.twitter_handle %>
-  <hr>
-
-  <h2>Latest Tweets</h2>
-  <ul>
-  <% @client.user_timeline(@user.twitter_handle, count: "10").each do |tweet| %>
-    <li><%= raw(auto_link(tweet.text)) %></li>
-  <% end %>
-  </ul>
-<% end %>
 <br>
 <%= link_to "Return to home", root_path %>

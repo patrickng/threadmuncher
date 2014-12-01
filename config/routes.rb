@@ -1,14 +1,17 @@
 Threadmuncher::Application.routes.draw do
+  devise_for :users
   root to: "main#index"
 
   mount API => '/'
 
-  resources :users, only: [:new, :create]
+  # resources :users, only: [:new, :create]
   get "/user/:handle", to: "users#show", as: "user_profile"
-  get "/user/:handle/edit", to: "users#edit", as: "edit_user_profile"
-  put "/user/:handle", to: "users#update", as: "update_user_profile"
+  # get "/user/:handle/edit", to: "users#edit", as: "edit_user_profile"
+  # put "/user/:handle", to: "users#update", as: "update_user_profile"
+  
+  # devise_for :users, controllers: { sessions: "users/sessions" }
 
-  resources :sessions
+  # resources :sessions
 
   resources :categories, only: [:index, :show, :new, :create]
 
@@ -23,7 +26,7 @@ Threadmuncher::Application.routes.draw do
     end
   end
 
-  get "logout" => "sessions#destroy", as: "logout"
-  get "login" => "sessions#new", as: "login"
-  get "signup" => "users#new", as: "signup"
+  get "logout" => "devise/sessions#destroy", as: "logout"
+  get "login" => "devise/sessions#new", as: "login"
+  get "signup" => "devise/registrations#new", as: "signup"
 end
