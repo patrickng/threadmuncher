@@ -2,8 +2,6 @@ Threadmuncher::Application.routes.draw do
   devise_for :users
   root to: "main#index"
 
-  mount API => '/'
-
   # resources :users, only: [:new, :create]
   get "/user/:handle", to: "users#show", as: "user_profile"
   # get "/user/:handle/edit", to: "users#edit", as: "edit_user_profile"
@@ -21,9 +19,7 @@ Threadmuncher::Application.routes.draw do
   end
 
   namespace :api, path: "", constraints: { subdomain: "api" }, defaults: { format: "json" } do
-    namespace :v1 do
-      resources :posts
-    end
+    mount API => '/'
   end
 
   # devise_for :users 
