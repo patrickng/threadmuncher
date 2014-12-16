@@ -24,6 +24,7 @@ module Posts
       params do
         requires :id, type: Integer, desc: "Post ID."
       end
+      
       route_param :id do
         get do
           post = Post.find(params[:id])
