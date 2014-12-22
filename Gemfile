@@ -22,6 +22,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'pry'
   gem 'pry-nav'
+  gem 'guard-livereload', require: false
 end
 
 group :test do
